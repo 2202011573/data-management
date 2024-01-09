@@ -1,0 +1,1480 @@
+$$$$$Page life cycle
+<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="WebForm1.aspx.cs" Inherits="WebApplication21.WebForm1" %>
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title></title>
+</head>
+<body>
+    <form id="form1" runat="server">
+        <div>
+             <asp:Label ID="Label1" runat="server" Text=""></asp:Label>
+        <br />
+        <asp:Button ID="Button1" runat="server" Text="Submit" OnClick="Button1_Click" />
+        </div>
+    </form>
+</body>
+</html>
+Cs.file
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+
+namespace WebApplication21
+{
+    public partial class WebForm1 : System.Web.UI.Page
+    {
+        protected void Page_PreInit(object sender, EventArgs e)
+        {
+            Label1.Text = Label1.Text + "<br/>" + "PreInit";
+        }
+
+        protected void Page_Init(object sender, EventArgs e)
+        {
+            Label1.Text = Label1.Text + "<br/>" + "Init";
+        }
+
+        protected void Page_InitComplete(object sender, EventArgs e)
+        {
+            Label1.Text = Label1.Text + "<br/>" + "InitComplete";
+        }
+
+        protected override void OnPreLoad(EventArgs e)
+        {
+            Label1.Text = Label1.Text + "<br/>" + "PreLoad";
+        }
+        protected void Page_Load(object sender, EventArgs e)
+        {
+            Label1.Text = Label1.Text + "<br/>" + "Load";
+        }
+
+        protected void Button1_Click(object sender, EventArgs e)
+        {
+            Label1.Text = Label1.Text + "<br/>" + "btnSubmit_Click";
+        }
+
+        protected void Page_LoadComplete(object sender, EventArgs e)
+        {
+            Label1.Text = Label1.Text + "<br/>" + "LoadComplete";
+        }
+
+        protected override void OnPreRender(EventArgs e)
+        {
+            Label1.Text = Label1.Text + "<br/>" + "PreRender";
+        }
+
+        protected override void OnSaveStateComplete(EventArgs e)
+        {
+            Label1.Text = Label1.Text + "<br/>" + "SaveStateComplete";
+        }
+
+        protected void Page_UnLoad(object sender, EventArgs e)
+        {
+            Label1.Text = Label1.Text + "<br/>" + "UnLoad";
+        }
+    }
+}
+        
+
+
+
+$$$$$$Postback and viewstate
+
+<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="WebForm1.aspx.cs" Inherits="WebApplication20.WebForm1" %>
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title></title>
+</head>
+<body>
+    <form id="form1" runat="server">
+        <div>
+        <asp:DropDownList ID="DropDownList1" runat="server" AutoPostBack="True"></asp:DropDownList>
+        
+        <asp:DropDownList ID="DropDownList2" runat="server" EnableViewState="False"></asp:DropDownList>
+        
+            <asp:Button ID="Button1" runat="server" Text="Button" OnClick="Button1_Click" />
+            <br />
+        </div>
+    </form>
+</body>
+</html>
+
+$$Cs.file
+using System;
+using System.Web.UI.WebControls;
+
+namespace WebApplication20
+{
+    public partial class WebForm1 : System.Web.UI.Page
+    {
+        protected void Page_Load(object sender, EventArgs e)
+        {
+            bind1();
+            bind2();
+        }
+
+        public void bind1()
+        {
+            ListItem l1 = new ListItem("India");
+            ListItem l2 = new ListItem("US");
+            ListItem l3 = new ListItem("Japan");
+            DropDownList1.Items.Add(l1);
+            DropDownList1.Items.Add(l2);
+            DropDownList1.Items.Add(l3);
+        }
+
+        public void bind2()
+        {
+            ListItem l1 = new ListItem("India");
+            ListItem l2 = new ListItem("US");
+            ListItem l3 = new ListItem("Japan");
+            DropDownList2.Items.Add(l1);
+            DropDownList2.Items.Add(l2);
+            DropDownList2.Items.Add(l3);
+        }
+
+        protected void Button1_Click(object sender, EventArgs e)
+        {
+            // Your button click logic goes here
+        }
+    }
+}
+
+
+     $$$$ Dropdownlist box,listbox,checkbutton list,raddiobutton list     
+
+<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="WebForm1.aspx.cs" Inherits="WebApplication21.WebForm1" %>
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title></title>
+</head>
+<body>
+    <form id="form1" runat="server">
+        <div>
+             <h1>list control and function</h1><br />
+            <br />
+            list control</div>
+        <asp:ListBox ID="ListBox1" runat="server" >
+            <asp:ListItem>mango</asp:ListItem>
+            <asp:ListItem>orange</asp:ListItem>
+            <asp:ListItem>apple</asp:ListItem>
+            <asp:ListItem>banana</asp:ListItem>
+        </asp:ListBox>
+        <br />
+        dropdown list<asp:DropDownList ID="DropDownList1" runat="server" >
+            <asp:ListItem>red</asp:ListItem>
+            <asp:ListItem>blue</asp:ListItem>
+            <asp:ListItem>pink</asp:ListItem>
+            <asp:ListItem>white</asp:ListItem>
+        </asp:DropDownList>
+        <br />
+        <br />
+        raddio button list<asp:RadioButtonList ID="RadioButtonList1" runat="server">
+            <asp:ListItem>yes</asp:ListItem>
+            <asp:ListItem>no</asp:ListItem>
+        </asp:RadioButtonList>
+        <br />
+        checkbutton list<asp:CheckBoxList ID="CheckBoxList1" runat="server">
+            <asp:ListItem>hindi</asp:ListItem>
+            <asp:ListItem>marathi</asp:ListItem>
+            <asp:ListItem>english</asp:ListItem>
+            <asp:ListItem>urdu</asp:ListItem>
+        </asp:CheckBoxList>
+        <br />
+        <asp:Button ID="Button1" runat="server" OnClick="Button1_Click" Text="Button" />
+        <asp:Label ID="ResultLabel" runat="server" Text=""></asp:Label>
+        <br />
+        <br />
+    </form>
+</body>
+</html>
+
+ $$$Cs.file
+
+using System;
+using System.Text;
+using System.Web.UI.WebControls;
+
+namespace WebApplication21
+{
+    public partial class WebForm1 : System.Web.UI.Page
+    {
+        protected void Page_Load(object sender, EventArgs e)
+        {
+            // You can add additional logic here if needed
+        }
+
+        protected void Button1_Click(object sender, EventArgs e)
+        {
+            // Display selected items from ListBox
+            StringBuilder result = new StringBuilder("Selected items from ListBox: ");
+            foreach (ListItem item in ListBox1.Items)
+            {
+                if (item.Selected)
+                {
+                    result.Append(item.Text + ", ");
+                }
+            }
+            result.Length -= 2; // Remove the trailing comma and space
+            result.Append("<br/>");
+
+            // Display selected item from DropDownList
+            result.Append("Selected item from DropDownList: ");
+            result.Append(DropDownList1.SelectedItem.Text + "<br/>");
+
+            // Display selected item from RadioButtonList
+            result.Append("Selected item from RadioButtonList: ");
+            result.Append(RadioButtonList1.SelectedItem.Text + "<br/>");
+
+            // Display selected items from CheckBoxList
+            result.Append("Selected items from CheckBoxList: ");
+            foreach (ListItem item in CheckBoxList1.Items)
+            {
+                if (item.Selected)
+                {
+                    result.Append(item.Text + ", ");
+                }
+            }
+            result.Length -= 2; // Remove the trailing comma and space
+
+            // Display the result in a label or any other control
+            ResultLabel.Text = result.ToString();
+        }
+    }
+}
+
+
+
+
+
+$$$$$Arraylist,hashtable
+
+<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="WebForm1.aspx.cs" Inherits="WebApplication20.WebForm1" %>
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title></title>
+</head>
+<body>
+    <form id="form1" runat="server">
+        <div>
+        
+        <asp:GridView ID="GridView1" runat="server" ></asp:GridView>
+      <asp:GridView ID="GridView2" runat="server" AutoGenerateColumns="false">
+<Columns>
+<asp:BoundField DataField="key" HeaderText="Roll No" />
+<asp:BoundField DataField="value" HeaderText="Name" />
+</Columns>
+</asp:GridView>
+
+        
+        
+        </div>
+    </form>
+</body>
+</html>
+
+$$$$Cs.file
+using System;
+using System.Collections;
+
+
+namespace WebApplication20
+{
+    public partial class WebForm1 : System.Web.UI.Page
+    {
+        protected void Page_Load(object sender, EventArgs e)
+        {
+            ArrayList list = new ArrayList();
+            list.Add("AAAA");
+            list.Add("BBBB");
+            list.Add("CCCC"); GridView1.DataSource = list; GridView1.DataBind();
+
+
+            Hashtable hashItems = new Hashtable();
+            hashItems.Add("4", "GGGG");
+            hashItems.Add("5", "HHHH");
+            hashItems.Add("6", "IIII");
+            hashItems.Add("7", "JJJJ"); GridView2.DataSource = hashItems;
+
+            GridView2.DataBind();
+        }
+
+
+
+    }
+
+}
+
+$$$$Datable
+<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="WebForm1.aspx.cs" Inherits="WebApplication20.WebForm1" %>
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title></title>
+</head>
+<body>
+    <form id="form1" runat="server">
+     <div>
+    <asp:GridView ID="GridView1" runat="server" ></asp:GridView> 
+      </div>
+    </form>
+</body>
+</html>
+
+$$$$$Cs.file    
+using System;
+using System.Collections;
+using System.Data;
+
+namespace WebApplication20
+{
+    public partial class WebForm1 : System.Web.UI.Page
+    {
+        protected void Page_Load(object sender, EventArgs e)
+        {
+            DataTable da = new DataTable();
+            da.Columns.Add("Roll_No");
+            da.Columns.Add("Student_Name");
+            da.Columns.Add("Email_id");
+
+            da.Rows.Add("101","swati","swati123@gmail.com");
+            da.Rows.Add("101", "amit", "samit23@gmail.com");
+            da.Rows.Add("101", "pumit", "pumit23@gmail.com");
+
+            GridView1.DataSource = da;
+            GridView1.DataBind();
+
+        } 
+    }
+
+}
+
+       
+
+$$$$$$Validation control register form
+
+<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="WebForm1.aspx.cs" Inherits="WebApplication29.WebForm1" %>
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title></title>
+</head>
+<body>
+    <form id="form1" runat="server">
+        <div>
+             <h1>  Registration Form </h1>  
+            
+        <div>
+            <label for="TextBox1" >First name</label>
+            <asp:TextBox ID="TextBox1" runat="server" ></asp:TextBox>
+            <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server"
+                ControlToValidate="TextBox1" ErrorMessage="*" ForeColor="Red"></asp:RequiredFieldValidator></br></br>
+        </div>
+
+        <div>
+            <label for="TextBox2" >Last name</label>
+            <asp:TextBox ID="TextBox2" runat="server" ></asp:TextBox>
+            <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server"
+                ControlToValidate="TextBox2" ErrorMessage="*" ForeColor="Red"></asp:RequiredFieldValidator></br></br>
+        </div>
+
+        <div>
+            <label for="TextBox3" >Address</label>
+            <asp:TextBox ID="TextBox3" runat="server" ></asp:TextBox>
+            <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server"
+                ControlToValidate="TextBox3" ErrorMessage="*" ForeColor="Red"></asp:RequiredFieldValidator></br></br>
+        </div>
+
+        <div>
+            <label for="TextBox4" >Mobile NO</label>
+            <asp:TextBox ID="TextBox4" runat="server" ></asp:TextBox>
+            <asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server"
+    ControlToValidate="TextBox4" ErrorMessage="*" ForeColor="Red"></asp:RequiredFieldValidator>
+            <asp:RegularExpressionValidator ID="RegularExpressionValidator2" runat="server"
+                ControlToValidate="TextBox4" ErrorMessage="Please enter only 10 digit Mobile Number"
+                ValidationExpression="\d{10}" ForeColor="Red"></asp:RegularExpressionValidator></br></br>
+        </div>
+
+        <div>
+            <label for="TextBox5" >Email ID</label>
+            <asp:TextBox ID="TextBox5" runat="server" ></asp:TextBox>
+                   <asp:RequiredFieldValidator ID="RequiredFieldValidator5" runat="server"
+ControlToValidate="TextBox5" ErrorMessage="*" ForeColor="Red"></asp:RequiredFieldValidator>
+            <asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server"
+                ControlToValidate="TextBox5" ErrorMessage="Please enter valid email id"
+                ValidationExpression="\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*" ForeColor="Red"></asp:RegularExpressionValidator></br></br>
+        </div>
+
+        <div>
+            <label for="TextBox6" >Password</label>
+            <asp:TextBox ID="TextBox6" runat="server"  TextMode="Password" ></asp:TextBox>
+            <asp:RequiredFieldValidator ID="RequiredFieldValidator6" runat="server"
+                ControlToValidate="TextBox6" ErrorMessage="*" ForeColor="Red"></asp:RequiredFieldValidator></br></br>
+        </div>
+
+        <div>
+            <label for="TextBox8" >Confirm Password</label>
+            <asp:TextBox ID="TextBox8" runat="server" Height="27px" TextMode="Password" Width="156px"></asp:TextBox>
+            <asp:CompareValidator ID="CompareValidator1" runat="server"
+                ControlToCompare="TextBox6" ControlToValidate="TextBox8" ErrorMessage="Password is not match"
+                ForeColor="Red"></asp:CompareValidator></br></br>
+        </div>
+
+        <div>
+            <label for="TextBox7" >Age</label>
+            <asp:TextBox ID="TextBox7" runat="server"></asp:TextBox>
+            <asp:RequiredFieldValidator ID="RequiredFieldValidator7" runat="server"
+                ControlToValidate="TextBox7" ErrorMessage="*" ForeColor="Red"></asp:RequiredFieldValidator>
+            <asp:RangeValidator ID="RangeValidator1" runat="server" ControlToValidate="TextBox7"
+                ErrorMessage="Please enter valid age range " MaximumValue="25" MinimumValue="18"
+                ForeColor="#FF3300"></asp:RangeValidator></br></br>
+        </div>
+
+            <div>
+            <label>Gender</label>
+            <asp:RadioButtonList ID="RadioButtonListGender" runat="server">
+                <asp:ListItem Text="Male" Value="Male"></asp:ListItem>
+                <asp:ListItem Text="Female" Value="Female"></asp:ListItem>
+            </asp:RadioButtonList></br></br>
+        </div>
+
+        <div>
+    <asp:Button ID="Button1" runat="server" OnClick="Button1_Click" Text="SUBMIT"
+        Height="30px" Width="86px" Font-Bold="True" Font-Italic="True" Font-Overline="False"
+        FontSize="Medium" ForeColor="#FF0066"/>
+    
+</div>
+<div>
+    <asp:Label ID="ResultLabel" runat="server"        EnableViewState="false"></asp:Label>
+</div>
+</div>
+</form>
+</body>
+</html>
+  
+$$$$$Cs.file
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+
+namespace WebApplication29
+{
+    public partial class WebForm1 : System.Web.UI.Page
+    {
+        protected void Page_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void Button1_Click(object sender, EventArgs e)
+        {
+            string firstName = TextBox1.Text;
+            string lastName = TextBox2.Text;
+            string address = TextBox3.Text;
+            string mobileNo = TextBox4.Text;
+            string email = TextBox5.Text;
+            string password = TextBox6.Text;
+            string confirmPassword = TextBox8.Text;
+            string age = TextBox7.Text;
+            string gender = RadioButtonListGender.SelectedValue;
+
+            // Display the values in a label (you can use another HTML element if needed)
+            ResultLabel.Text = $"First Name: {firstName}<br/>" +
+                               $"Last Name: {lastName}<br/>" +
+                               $"Address: {address}<br/>" +
+                               $"Mobile No: {mobileNo}<br/>" +
+                               $"Email ID: {email}<br/>" +
+                               $"Password: {password}<br/>" +
+                               $"Confirm Password: {confirmPassword}<br/>" +
+                               $"Age: {age}<br/>" +
+                               $"Gender: {gender}";
+        }
+    }
+    }
+
+
+$$$$$$Reapeter Control and Various templates   
+<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="YourPageName.aspx.cs" Inherits="YourNamespace.YourPageName" %>
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title>Repeater with Employee Data</title>
+</head>
+<body>
+    <form id="form1" runat="server">
+        <div>
+            <asp:Repeater ID="Repeater1" runat="server">
+                <HeaderTemplate>
+                    <table border="1">
+                        <tr>
+                            <th>EmployeeID</th>
+                            <th>EmployeeName</th>
+                            <th>Department</th>
+                        </tr>
+                </HeaderTemplate>
+                <ItemTemplate>
+                    <tr>
+                        <td><%# Eval("EmployeeID") %></td>
+                        <td><%# Eval("EmployeeName") %></td>
+                        <td><%# Eval("Department") %></td>
+                    </tr>
+                </ItemTemplate>
+                <AlternatingItemTemplate>
+                    <tr style="background-color:#f2f2f2;">
+                        <td><%# Eval("EmployeeID") %></td>
+                        <td><%# Eval("EmployeeName") %></td>
+                        <td><%# Eval("Department") %></td>
+                    </tr>
+                </AlternatingItemTemplate>
+                <FooterTemplate>
+                    </table>
+                </FooterTemplate>
+            </asp:Repeater>
+        </div>
+    </form>
+</body>
+</html>
+
+$$$$$Cs.file
+using System;
+using System.Collections.Generic;
+using System.Web.UI.WebControls;
+
+public partial class YourPageName : System.Web.UI.Page
+{
+    protected void Page_Load(object sender, EventArgs e)
+    {
+        if (!IsPostBack)
+        {
+            List<Employee> employeeData = GetEmployeeData();
+            Repeater1.DataSource = employeeData;
+            Repeater1.DataBind();
+        }
+    }
+
+    protected List<Employee> GetEmployeeData()
+    {
+        // Replace this with your actual data retrieval logic from the database
+        List<Employee> employees = new List<Employee>
+        {
+            new Employee { EmployeeID = 101, EmployeeName = "Swati", Department = "IT" },
+            new Employee { EmployeeID = 102, EmployeeName = "Priti", Department = "Electric" },
+            new Employee { EmployeeID = 103, EmployeeName = "Ankita", Department = "Mechanical" }
+        };
+
+        return employees;
+    }
+
+    public class Employee
+    {
+        public int EmployeeID { get; set; }
+        public string EmployeeName { get; set; }
+        public string Department { get; set; }
+    }
+}
+ 
+
+$$$$$$Paging ,sorting ,filtering
+<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="WebForm1.aspx.cs" Inherits="WebApplication14.WebForm1" %>
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title></title>
+</head>
+<body>
+    <form id="form1" runat="server">
+        <div>
+         <asp:TextBox ID="txtStudentNameFilter" runat="server" placeholder="Filter by StudentName"></asp:TextBox>
+<asp:Button ID="btnApplyFilter" runat="server" Text="Apply Filter" OnClick="ApplyFilter" />
+
+<asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="True"
+    AllowPaging="True" AllowSorting="True"
+    OnPageIndexChanging="GridView1_PageIndexChanging"
+    OnSorting="GridView1_Sorting">
+</asp:GridView>
+
+        </div>
+    </form>
+</body>
+</html>
+
+$$$$$Cs.file
+using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Linq;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+
+namespace WebApplication14
+{
+    public partial class WebForm1 : System.Web.UI.Page
+    {
+        private DataTable StudentsData;
+
+        protected void Page_Load(object sender, EventArgs e)
+        {
+            if (!IsPostBack)
+            {
+                BindData();
+            }
+        }
+
+        private void BindData()
+        {
+            // Creating a DataTable with sample data (replace this with your database logic)
+            StudentsData = new DataTable();
+            StudentsData.Columns.Add("StudentID", typeof(int));
+            StudentsData.Columns.Add("StudentName", typeof(string));
+            StudentsData.Columns.Add("Marks", typeof(int));
+            StudentsData.Columns.Add("City", typeof(string));
+
+            StudentsData.Rows.Add(11, "Priti", 24, "Jalgaon");
+            StudentsData.Rows.Add(12, "Ankita", 25, "Nasik");
+            StudentsData.Rows.Add(13, "Swati", 36, "Pune");
+            StudentsData.Rows.Add(14, "Harsha", 48, "Chalisgaon");
+            StudentsData.Rows.Add(15, "Bhanu", 50, "Mumbai");
+            StudentsData.Rows.Add(11, "Priti", 24, "Jalgaon");
+            StudentsData.Rows.Add(12, "Ankita", 25, "Nasik");
+            StudentsData.Rows.Add(13, "Swati", 36, "Pune");
+            StudentsData.Rows.Add(14, "Harsha", 48, "Chalisgaon");
+            StudentsData.Rows.Add(15, "Bhanu", 50, "Mumbai");
+            StudentsData.Rows.Add(11, "Priti", 24, "Jalgaon");
+            StudentsData.Rows.Add(12, "Ankita", 25, "Nasik");
+            StudentsData.Rows.Add(13, "Swati", 36, "Pune");
+            StudentsData.Rows.Add(14, "Harsha", 48, "Chalisgaon");
+            StudentsData.Rows.Add(15, "Bhanu", 50, "Mumbai");
+
+            ViewState["StudentsData"] = StudentsData; // Save DataTable in ViewState for paging and sorting
+
+            GridView1.DataSource = StudentsData;
+            GridView1.DataBind();
+        }
+
+        protected void GridView1_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        {
+            GridView1.PageIndex = e.NewPageIndex;
+            BindData();
+        }
+
+        protected void GridView1_Sorting(object sender, GridViewSortEventArgs e)
+        {
+            StudentsData = ViewState["StudentsData"] as DataTable;
+            if (StudentsData != null)
+            {
+                StudentsData.DefaultView.Sort = e.SortExpression + " " + GetSortDirection(e.SortExpression);
+                GridView1.DataSource = StudentsData;
+                GridView1.DataBind();
+            }
+        }
+
+        protected void ApplyFilter(object sender, EventArgs e)
+        {
+            string filterText = txtStudentNameFilter.Text.Trim();
+            DataTable filteredData = StudentsData.AsEnumerable()
+                .Where(row => row.Field<string>("StudentName").IndexOf(filterText, StringComparison.OrdinalIgnoreCase) >= 0)
+                .CopyToDataTable();
+
+            GridView1.DataSource = filteredData;
+            GridView1.DataBind();
+        }
+
+        private string GetSortDirection(string column)
+        {
+            string sortDirection = "ASC";
+            string lastColumn = ViewState["SortExpression"] as string;
+
+            if (lastColumn != null && lastColumn == column)
+            {
+                sortDirection = ViewState["SortDirection"] as string;
+                if (sortDirection == "ASC")
+                {
+                    sortDirection = "DESC";
+                }
+                else
+                {
+                    sortDirection = "ASC";
+                }
+            }
+
+            ViewState["SortDirection"] = sortDirection;
+            ViewState["SortExpression"] = column;
+
+            return sortDirection;
+        }
+    }
+
+
+}
+
+$$$$$Editing 
+<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="YourPage.aspx.cs" Inherits="YourNamespace.YourPage" %>
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title>Your ASP.NET Page</title>
+</head>
+<body>
+    <form id="form1" runat="server">
+        <div>
+            <asp:Label ID="Label1" runat="server" Text="DataGrid Editing"></asp:Label>
+            <asp:DataGrid ID="DataGrid1" runat="server" AutoGenerateColumns="False" OnEditCommand="DataGrid1_EditCommand" OnUpdateCommand="DataGrid1_UpdateCommand">
+                <Columns>
+                    <asp:BoundColumn DataField="Name" HeaderText="Name" />
+                    <asp:BoundColumn DataField="Age" HeaderText="Age" />
+                    <asp:EditCommandColumn EditText="Edit" CancelText="Cancel" UpdateText="Update" />
+                </Columns>
+            </asp:DataGrid>
+
+            <asp:Label ID="Label2" runat="server" Text="DataList Editing"></asp:Label>
+            <asp:DataList ID="DataList1" runat="server" RepeatDirection="Vertical" OnEditCommand="DataList1_EditCommand" OnUpdateCommand="DataList1_UpdateCommand">
+                <ItemTemplate>
+                    Name: <asp:Label ID="lblName" runat="server" Text='<%# Eval("Name") %>'></asp:Label><br />
+                    Age: <asp:Label ID="lblAge" runat="server" Text='<%# Eval("Age") %>'></asp:Label><br />
+                    <asp:LinkButton ID="lnkEdit" runat="server" CommandName="Edit">Edit</asp:LinkButton><br />
+                </ItemTemplate>
+                <EditItemTemplate>
+                    Name: <asp:TextBox ID="txtName" runat="server" Text='<%# Eval("Name") %>'></asp:TextBox><br />
+                    Age: <asp:TextBox ID="txtAge" runat="server" Text='<%# Eval("Age") %>'></asp:TextBox><br />
+                    <asp:LinkButton ID="lnkUpdate" runat="server" CommandName="Update">Update</asp:LinkButton>
+                    <asp:LinkButton ID="lnkCancel" runat="server" CommandName="Cancel">Cancel</asp:LinkButton><br />
+                </EditItemTemplate>
+            </asp:DataList>
+        </div>
+    </form>
+</body>
+</html>
+
+$$$$Cs.file
+using System;
+using System.Collections.Generic;
+using System.Web.UI.WebControls;
+
+namespace YourNamespace
+{
+    public partial class YourPage : System.Web.UI.Page
+    {
+        private List<Person> people;
+
+        protected void Page_Load(object sender, EventArgs e)
+        {
+            if (!IsPostBack)
+            {
+                // Sample data
+                people = new List<Person>
+                {
+                    new Person { Name = "John", Age = 30 },
+                    new Person { Name = "Alice", Age = 25 },
+                    new Person { Name = "Bob", Age = 35 }
+                };
+
+                // DataGrid
+                DataGrid1.DataSource = people;
+                DataGrid1.DataBind();
+
+                // DataList
+                DataList1.DataSource = people;
+                DataList1.DataBind();
+            }
+        }
+
+        protected void DataGrid1_EditCommand(object source, DataGridCommandEventArgs e)
+        {
+            DataGrid1.EditItemIndex = e.Item.ItemIndex;
+            DataGrid1.DataBind();
+        }
+
+        protected void DataGrid1_UpdateCommand(object source, DataGridCommandEventArgs e)
+        {
+            TextBox txtName = (TextBox)e.Item.FindControl("txtName");
+            TextBox txtAge = (TextBox)e.Item.FindControl("txtAge");
+
+            // Update the data source
+            int index = e.Item.ItemIndex;
+            people[index].Name = txtName.Text;
+            people[index].Age = int.Parse(txtAge.Text);
+
+            // Exit edit mode
+            DataGrid1.EditItemIndex = -1;
+            DataGrid1.DataBind();
+        }
+
+        protected void DataList1_EditCommand(object source, DataListCommandEventArgs e)
+        {
+            DataList1.EditItemIndex = e.Item.ItemIndex;
+            DataList1.DataBind();
+        }
+
+        protected void DataList1_UpdateCommand(object source, DataListCommandEventArgs e)
+        {
+            TextBox txtName = (TextBox)e.Item.FindControl("txtName");
+            TextBox txtAge = (TextBox)e.Item.FindControl("txtAge");
+
+            // Update the data source
+            int index = e.Item.ItemIndex;
+            people[index].Name = txtName.Text;
+            people[index].Age = int.Parse(txtAge.Text);
+
+            // Exit edit mode
+            DataList1.EditItemIndex = -1;
+            DataList1.DataBind();
+        }
+
+        public class Person
+        {
+            public string Name { get; set; }
+            public int Age { get; set; }
+        }
+    }
+}
+
+
+$$$$$Simple /complex DataReaderDataset objects
+
+<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="WebForm1.aspx.cs" Inherits="WebApplication25.WebForm1" %>
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title></title>
+</head>
+<body>
+    <form id="form1" runat="server">
+        <div>
+              <!-- Display DataSet in GridView -->
+            <h2>DataSet:</h2>
+            <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="True"></asp:GridView>
+
+            <hr />
+
+            <!-- Display DataReader in Repeater -->
+            <h2>DataReader:</h2>
+            <asp:Repeater ID="Repeater1" runat="server" OnItemCommand="Repeater1_ItemCommand">
+                <ItemTemplate>
+                    <ul>
+                        <li><%# Eval("E_ID") %></li>
+                        <li><%# Eval("E_name") %></li>
+                        <li><%# Eval("E_salary") %></li>
+                        <li><%# Eval("E_address") %></li>
+                    </ul>
+                </ItemTemplate>
+            </asp:Repeater>
+        </div>
+    </form>
+</body>
+</html>
+
+$$$$Cs.file
+using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Linq;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+
+namespace WebApplication25
+{
+    public partial class WebForm1 : System.Web.UI.Page
+    {
+        protected void Page_Load(object sender, EventArgs e)
+        {
+            // Sample data for the "emp" table
+            DataTable dataTable = new DataTable("emp");
+            dataTable.Columns.Add("E_ID", typeof(int));
+            dataTable.Columns.Add("E_name", typeof(string));
+            dataTable.Columns.Add("E_salary", typeof(int));
+            dataTable.Columns.Add("E_address", typeof(string));
+
+            // Adding sample rows to the DataTable
+            dataTable.Rows.Add(100, "Priti", 1000, "Jalgaon");
+            dataTable.Rows.Add(101, "Ankita", 2000, "Nasik");
+            dataTable.Rows.Add(102, "Swati", 3000, "Pune");
+            dataTable.Rows.Add(104, "Harsha", 4000, "Chalisgaon");
+
+            // Create a DataSet and add the DataTable to it
+            DataSet dataSet = new DataSet();
+            dataSet.Tables.Add(dataTable);
+
+            // Display the DataSet in a GridView (HTML table)
+            GridView1.DataSource = dataSet.Tables["emp"];
+            GridView1.DataBind();
+
+            // Display the DataReader in a Repeater (HTML list)
+            using (DataTableReader dataReader = dataSet.CreateDataReader())
+            {
+                Repeater1.DataSource = dataReader;
+                Repeater1.DataBind();
+            }
+        }
+
+        protected void Repeater1_ItemCommand(object source, RepeaterCommandEventArgs e)
+        {
+
+        }
+    }
+}
+
+$$$$$Web service hosting,web service access
+$$$Web.asmx file
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.Services;
+
+namespace WebApplication26
+{
+    /// <summary>
+    /// Summary description for WebService1
+    /// </summary>
+    [WebService(Namespace = "http://tempuri.org/")]
+    [WebServiceBinding(ConformsTo = WsiProfiles.BasicProfile1_1)]
+    [System.ComponentModel.ToolboxItem(false)]
+    // To allow this Web Service to be called from script, using ASP.NET AJAX, uncomment the following line. 
+    // [System.Web.Script.Services.ScriptService]
+    public class WebService1 : System.Web.Services.WebService
+    {
+
+        [WebMethod]
+        public string HelloWorld()
+        {
+            return "Hello World";
+        }
+    }
+}
+
+$$$$$Html.code 
+<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="WebForm1.aspx.cs" Inherits="WebApplication26.WebForm1" %>
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title></title>
+</head>
+<body>
+    <form id="form1" runat="server">
+        <div>
+            <h1>Web Service Demo</h1>
+            <p>Result from Web Service: <asp:Label ID="lblResult" runat="server" Text=""></asp:Label></p>
+            <p>&nbsp;</p>
+                        <p>&nbsp;</p>
+                        <p>&nbsp;</p>
+                        <p>&nbsp;</p>
+        </div>
+    </form>
+</body>
+</html>
+
+$$$$Cs.file
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+
+namespace WebApplication26
+{
+    public partial class WebForm1 : System.Web.UI.Page
+    {
+        protected void Page_Load(object sender, EventArgs e)
+        {
+
+            if (!IsPostBack)
+                try
+                {
+                    localhost.WebService1 s = new localhost.WebService1();
+                    string result = s.HelloWorld();
+                    lblResult.Text = result;
+                }
+                catch (Exception ex)
+                {
+                    // Handle or log the exception
+                    lblResult.Text = "Error: " + ex.Message;
+                }
+        }
+    }
+}
+
+$$$$$Website navigation control(sitemappath,menu)
+$$$$Default.aspx code
+<%@ Page Title="Home Page" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Default.aspx.cs" Inherits="WebApplication27._Default" %>
+
+<asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
+
+    <main>
+        <asp:SiteMapPath ID="SiteMapPath1" runat="server"></asp:SiteMapPath>
+        <asp:Menu ID="Menu1" runat="server" DataSourceID="SiteMapDataSource1"></asp:Menu>
+        <asp:SiteMapDataSource ID="SiteMapDataSource1" runat="server" />
+    </main>
+
+</asp:Content>
+
+$$$Web form 1 .aspx code
+<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="WebForm1.aspx.cs" Inherits="WebApplication27.WebForm1" %>
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title></title>
+</head>
+<body>
+    <form id="form1" runat="server">
+        <div>
+            <asp:SiteMapPath ID="SiteMapPath1" runat="server"></asp:SiteMapPath>
+            <br/>
+            <h1> hii and welcome to webform 1 page</h1>
+        </div>
+    </form>
+</body>
+</html>
+ 
+$$$Web form 2 .aspx code
+<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="WebForm2.aspx.cs" Inherits="WebApplication27.WebForm2" %>
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title></title>
+</head>
+<body>
+    <form id="form1" runat="server">
+        <div>
+            <asp:SiteMapPath ID="SiteMapPath1" runat="server"></asp:SiteMapPath>
+            <br/>
+<h1> hii and welcome to webform 2 page</h1>
+
+        </div>
+    </form>
+</body>
+</html>
+$$$$Web form 3.aspx code
+<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="WebForm3.aspx.cs" Inherits="WebApplication27.WebForm3" %>
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title></title>
+</head>
+<body>
+    <form id="form1" runat="server">
+        <div>
+            <asp:SiteMapPath ID="SiteMapPath1" runat="server"></asp:SiteMapPath>
+            <br/>
+<h1> hii and welcome to webform 3 page</h1>
+
+        </div>
+    </form>
+</body>
+</html>
+ 
+$$$$$Web.sitemap code
+<?xml version="1.0" encoding="utf-8" ?>
+<siteMap xmlns="http://schemas.microsoft.com/AspNet/SiteMap-File-1.0" >
+  <siteMapNode url="WebForm1.aspx" title="Home"  description="">
+    <siteMapNode url="WebForm2.aspx" title="webform2"  description="" />
+    <siteMapNode url="WebForm3.aspx" title="webform3"  description="" />
+  </siteMapNode>
+</siteMap>
+
+ 
+
+$$$$Console application code
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Practical_2
+{
+    internal class Program
+    {
+        //Function Overloading
+        /*
+        public void add(int a, int b)
+        {
+            Console.WriteLine(a + b);
+        }
+        public void add(float x, float y)
+        {
+            Console.WriteLine(x + y);
+        }
+        public void add(string s1, string s2)
+        {
+            Console.WriteLine(s1 + s2);
+        }
+        static void Main(string[] args)
+        {
+            Program obj = new Program();
+            obj.add(10, 20);
+            obj.add(10.5f, 20.5f);
+            obj.add("pranaya", "kumar");
+            Console.WriteLine("Press any key to exist.");
+            Console.ReadKey();
+        }
+        */
+
+        //Function Overriding
+        /*
+        public virtual void show()
+        {
+            Console.WriteLine("Super class show method");
+        }
+    }
+    class Class2 :Program
+    {
+        public override void show()
+        {
+            Console.WriteLine("Sub class override show method");
+        }
+    }
+    class Practical_2
+    {
+        static void Main(string[] args)
+        {
+            Class2 obj = new Class2();
+            obj.show();
+            Console.ReadKey();
+        }
+        */
+
+        //Function Hiding
+        /*
+        public void display()
+        {
+            Console.WriteLine("Super class display method");
+        }
+    }
+    class Class2 : Program
+    {
+        public new void display()
+        {
+            Console.WriteLine("Sub class display method");
+        }
+    }
+    class Practical2
+    {
+        static void Main(string[] args)
+        {
+            Class2 obj = new Class2();
+            obj.display();
+            Console.ReadKey();
+        }
+        */
+
+
+        //Encapsulation
+        /*
+        //hiding class data by declaring the variable as private
+        private double balance;
+        //creating public setter and getter methods
+        public double getBalance()
+        {
+            //add validation logic if needed
+            return balance;
+        }
+        public void setBalance(double balance)
+        {
+            // add validation logic to check whether data is correct or not
+            this.balance = balance;
+        }
+    }
+    class BankUser
+    {
+        public static void Main()
+        {
+            Program SBI = new Program();
+            SBI.setBalance(500);
+            Console.WriteLine(SBI.getBalance());
+            Console.WriteLine("Press any key to exist.");
+            Console.ReadKey();
+        }
+        */
+
+        //Inheritance
+        /*
+        int BranchCode;
+        string BranchName, BranchAddress;
+        public void GetBranchData()
+        {
+            Console.WriteLine("ENTER BRANCH DETAILS:");
+            Console.WriteLine("ENTER BRANCH CODE");
+            BranchCode = int.Parse(Console.ReadLine());
+            Console.WriteLine("ENTER BRANCH NAME");
+            BranchName = Console.ReadLine();
+            Console.WriteLine("ENTER BRANCH ADDRESS");
+            BranchAddress = Console.ReadLine();
+        }
+        public void DisplayBranchData()
+        {
+            Console.WriteLine("BRANCH CODE IS : " + BranchCode);
+            Console.WriteLine("BRANCH NAME IS : " + BranchName);
+            Console.WriteLine("BRANCH ADDRESS IS : " + BranchAddress);
+        }
+    }
+    class Employee : Program
+    {
+        int EmployeeId, EmployeeAge;
+        string EmployeeName, EmployeeAddress;
+        public void GetEmployeeData()
+        {
+            Console.WriteLine("ENTER EMPLYEE DETAILS:");
+            Console.WriteLine("ENTER EMPLOYEE ID");
+            EmployeeId = int.Parse(Console.ReadLine());
+            Console.WriteLine("ENTER EMPLOYEE AGE");
+            EmployeeAge = int.Parse(Console.ReadLine());
+            Console.WriteLine("ENTER EMPLOYEE NAME");
+            EmployeeName = Console.ReadLine();
+            Console.WriteLine("ENTER EMPLOYEE ADDRESS");
+            EmployeeAddress = Console.ReadLine();
+        }
+        public void DisplayEmployeeData()
+        {
+            Console.WriteLine("EMPLOYEE ID IS : " + EmployeeId);
+            Console.WriteLine("EMPLOYEE NAME IS : " + EmployeeName);
+            Console.WriteLine("EMPLOYEE ADDRESS IS : " + EmployeeAddress);
+            Console.WriteLine("EMPLOYEE AGE IS : " + EmployeeAge);
+        }
+    }
+    class Practical
+    {
+        static void Main(string[] args)
+        {
+            Employee obj1 = new Employee();
+            obj1.GetBranchData();
+            obj1.GetEmployeeData();
+            obj1.DisplayBranchData();
+            obj1.DisplayEmployeeData();
+            Console.WriteLine("Press any key to exist.");
+            Console.ReadKey();
+        }
+        */
+
+        //interface inheritance
+        /*
+        public interface A
+        {
+
+            void method1();
+            void method2();
+        }
+    
+    interface B : A
+    {
+        void method3();
+    }
+    class MyClass : B
+    {
+        public void method1()
+        {
+            Console.WriteLine("implement method1");
+        }
+        public void method2()
+        {
+            Console.WriteLine("implement method2");
+        }
+        public void method3()
+        {
+            Console.WriteLine("implement method3");
+        }
+    }
+        class Practical_2
+        {
+            static void Main(string[] args)
+            {
+                MyClass obj = new MyClass();
+                obj.method1();
+                obj.method2();
+                obj.method3();
+                Console.WriteLine("Press any key to exist.");
+                Console.ReadKey();
+            }
+        }
+        */
+
+        ////Abstract classes/methods
+        /*
+        public abstract class MyClass
+        {
+            public abstract void calculate(double x);
+            public void show()
+            {
+                Console.WriteLine("Show");
+            }
+        }
+        class Sub1 : MyClass
+        {
+            public override void calculate(double x)
+            {
+                Console.WriteLine("SQUARE ROOT IS " + Math.Sqrt(x));
+            }
+        }
+        class Test
+        {
+            static void Main(string[] args)
+            {
+                Sub1 obj1 = new Sub1();
+                obj1.calculate(9);
+                obj1.show();
+                Console.ReadKey();
+            }
+        }
+        */
+        //Collection Classes  Stack, Queue, LinkedList, SortedList, ArrayList, HashTable, etc.
+        /*
+        static void Main(string[] args)
+        {
+            //Createing ArrayList collection using default constructor
+            ArrayList al = new ArrayList();
+            Console.WriteLine("Initial Capacity: " + al.Capacity);
+            al.Add(10);
+            Console.WriteLine("Capacity after adding first item: " + al.Capacity);
+            al.Add("hello");
+            al.Add(true);
+            al.Add(3.14f);
+            Console.WriteLine("Capacity after adding fourth item: " + al.Capacity);
+            al.Add('A');
+            Console.WriteLine("Capacity after adding 5th element: " + al.Capacity);
+            //Printing the ArrayList elements using for loop
+            for (int i = 0; i < al.Count; i++)
+            {
+                Console.Write(al[i] + "  ");
+            }
+            Console.WriteLine();
+            //Removing the values from the middle of the array list
+            //here we are removing by value
+            al.Remove(true);
+            //You can also remove element by using index position
+            // al.RemoveAt(2);
+            //Printing the ArrayList elements using foreach loop after
+            // removing an element from the collection
+            foreach (object obj in al)
+            {
+                Console.Write(obj + "  ");
+            }
+            Console.WriteLine();
+            //inserting values into the middle of the array list collection
+            al.Insert(2, false);
+            // Printing the values of the collection using foreach loop after
+            // inserting an element into the middle of the collection
+            foreach (object obj in al)
+            {
+                Console.Write(obj + "  ");
+            }
+            Console.WriteLine();
+            // creating new ArrayList collection by passing the old 
+            // array list as parameter
+            ArrayList coll = new ArrayList(al);
+            Console.WriteLine("Initial capacity of new array list collection:" + coll.Capacity);
+            // Printing the values of the new array list collection using foreach loop
+            foreach (object obj in coll)
+            {
+                Console.Write(obj + "  ");
+            }
+            Console.ReadKey();
+        }
+*/
+
+        //Properties
+
+        private int _empid, _eage;
+       private string _ename, _eaddress;
+        public int empid
+        {
+            set
+            {
+                _empid = value;
+            }
+            get
+            {
+                return _empid;
+            }
+        }
+        public int eage
+        {
+            set
+            {
+                _eage = value;
+            }
+            get
+            {
+                return _eage;
+            }
+        }
+        public string ename
+        {
+            set
+            {
+                _ename = value;
+            }
+            get
+            {
+                return _ename;
+            }
+        }
+        public string eaddress
+        {
+            set
+            {
+                _eaddress = value;
+            }
+            get
+            {
+                return _eaddress;
+            }
+        }
+    }
+    class Practical_2
+{
+static void Main(string[] args)
+    {
+        Program obj1 = new Program();
+        obj1.empid = 101;
+        obj1.ename = "swati";
+        obj1.eage = 21;
+        obj1.eaddress = "Jalgaon";
+        Console.WriteLine("Employee details are:");
+        Console.WriteLine("employee id:" + obj1.empid);
+        Console.WriteLine("employee name:" + obj1.ename);
+        Console.WriteLine("employee age:" + obj1.eage);
+        Console.WriteLine("employee address:" + obj1.eaddress);
+        Console.ReadKey();
+    }
+}
+}
